@@ -5,7 +5,6 @@ class ServiceType
 
     private $connection;
     private $table_name = "service_type";
-    public $id;
     public function __construct($database)
     {
         $this->connection = $database;
@@ -72,20 +71,21 @@ class ServiceType
         $statement = $this->connection->prepare($query);
         $id        = htmlspecialchars(strip_tags($id));
         $statement->bindParam(":id", $id, PDO::PARAM_INT);
-        
+
         return $statement->execute() && $statement->rowCount() > 0;
     }
 
     public function sum()
     {
-        $query     = "SELECT 
-        SEC_TO_TIME(SUM(TIME_TO_SEC(time_saved))) FROM service_type";
+        //$totalTime = $_GET['total_time'] ?? null;
+        //if ($totalTime && $totalTime == true) {
+        $query     = "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(time_saved))) FROM {$this->table_name}";
         $statement = $this->connection->prepare($query);
         $statement->execute();
         $sum = $statement->fetchColumn();
         return $sum;
-
-
+        // }
+        //return;
     }
 }
 

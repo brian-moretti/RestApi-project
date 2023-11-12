@@ -5,7 +5,6 @@ class ServiceProvided
 
     private $connection;
     private $table_name = "service_provided";
-    private $service_type_id;
     public function __construct($database)
     {
         $this->connection = $database;
@@ -17,9 +16,9 @@ class ServiceProvided
         $statement = $this->connection->prepare($query);
 
         //! ID servizio va prelevato da ServiceType??
-        $data['selling_date'] = htmlspecialchars(strip_tags($data['selling_date']));
-        $data['quantity']     = htmlspecialchars(strip_tags($data['quantity']));
-        $data['id']           = htmlspecialchars(strip_tags($data['id']));
+        $data['selling_date']    = htmlspecialchars(strip_tags($data['selling_date']));
+        $data['quantity']        = htmlspecialchars(strip_tags($data['quantity']));
+        $data['service_type_id'] = htmlspecialchars(strip_tags($data['service_type_id']));
 
         $statement->bindValue(":selling_date", $data['selling_date']);
         $statement->bindValue(":quantity", $data['quantity'], PDO::PARAM_INT);
@@ -34,7 +33,7 @@ class ServiceProvided
     }
     public function read($id)
     {
-        $query     = "SELECT id, name, time_saved, selling_date, quantity  FROM service_type INNER JOIN {$this->table_name} ON id = service_type_id WHERE service_type_id = :id";
+        $query     = "SELECT sp.id, service_type_id, name, time_saved, selling_date, quantity  FROM {$this->table_name} AS sp INNER JOIN service_type AS st ON st.id = sp.service_type_id WHERE sp.id = :id";
         $statement = $this->connection->prepare($query);
 
         $id = htmlspecialchars(strip_tags($id));
@@ -46,7 +45,9 @@ class ServiceProvided
 
     public function readAll()
     {
-        $query = "SELECT id, name, time_saved, selling_date, quantity FROM {$this->table_name} INNER JOIN service_type ON id = service_type_id";
+        //! TEMPO TOTALE QUA DENTRO?!
+
+        $query = "SELECT sp.id, service_type_id, st.name, time_saved, selling_date, quantity FROM {$this->table_name} AS sp INNER JOIN service_type AS st ON st.id = service_type_id";
 
         $fromDate = $_GET['from'] ?? null;
         $toDate   = $_GET['to'] ?? null;
@@ -55,18 +56,19 @@ class ServiceProvided
 
         if ($fromDate) {
             $query .= " WHERE selling_date >= :from";
-            $params['from'] = $fromDate;
+            $params[':from'] = $fromDate;
         }
         if ($toDate) {
             $query .= ($fromDate ? ' AND' : ' WHERE') . " selling_date <= :to";
             $params[':to'] = $toDate;
         }
-
-
         if ($service) {
             $query .= ($toDate || $fromDate ? ' AND' : ' WHERE') . ' name = :service';
             $params[':service'] = $service;
         }
+
+        $query .= " ORDER BY service_type_id";
+
         $statement = $this->connection->prepare($query);
         $statement->execute($params);
         $results['provided'] = [];
@@ -78,7 +80,7 @@ class ServiceProvided
     }
     public function update($currentData, $newData)
     {
-        $query     = "UPDATE {$this->table_name} SET selling_date = :selling_date, quantity = :quantity WHERE service_type_id = :id";
+        $query     = "UPDATE {$this->table_name} SET selling_date = :selling_date, quantity = :quantity WHERE id = :id";
         $statement = $this->connection->prepare($query);
 
         $newData['selling_date'] = htmlspecialchars(strip_tags($newData['selling_date'] ?? ''));
@@ -94,7 +96,7 @@ class ServiceProvided
     public function delete($id)
     //! DELETE CASCADE SU TYPE
     {
-        $query     = "DELETE FROM {$this->table_name} WHERE service_type_id = :id";
+        $query     = "DELETE FROM {$this->table_name} WHERE id = :id";
         $statement = $this->connection->prepare($query);
 
         $id = htmlspecialchars(strip_tags($id));
@@ -103,9 +105,11 @@ class ServiceProvided
         return $statement->execute() && $statement->rowCount() > 0;
     }
 
-    public function filter()
+    public function sum()
     {
-        $query = "SELECT name, quantity, selling_date FROM {$this->table_name} INNER JOIN service_type ON id = service_type_id";
+        //$totalTime = $_GET['total_time'] ?? null;
+        //if ($totalTime && $totalTime == true) {
+        $query = "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(time_saved))) as time_saved, name FROM {$this->table_name} INNER JOIN service_type AS st ON st.id = service_type_id";
 
         $fromDate = $_GET['from'] ?? null;
         $toDate   = $_GET['to'] ?? null;
@@ -114,22 +118,25 @@ class ServiceProvided
 
         if ($fromDate) {
             $query .= " WHERE selling_date >= :from";
-            $params['from'] = $fromDate;
+            $params[':from'] = $fromDate;
         }
         if ($toDate) {
             $query .= ($fromDate ? ' AND' : ' WHERE') . " selling_date <= :to";
             $params[':to'] = $toDate;
         }
-
         if ($service) {
-            $query .= ($toDate ? ' AND' : ' WHERE') . ' name = :service';
+            $query .= ($toDate || $fromDate ? ' AND' : ' WHERE') . ' name = :service';
             $params[':service'] = $service;
         }
 
+        $query .= " GROUP BY name";
+
         $statement = $this->connection->prepare($query);
         $statement->execute($params);
-        $date = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $date;
+        $sum = $statement->fetchAll();
+        return $sum;
     }
+    //  return;
+    // }
 }
 ?>

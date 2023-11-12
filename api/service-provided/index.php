@@ -1,16 +1,11 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
+headerParams();
 
 require '../config/database.php';
 require '../functions.php';
-require '../ServiceProvided.php';
-require '../MethodGateway.php';
+require '../models/ServiceProvided.php';
+require '../controllers/MethodGateway.php';
 
 $db              = new Database();
 $connection      = $db->connect();

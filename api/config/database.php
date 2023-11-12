@@ -9,6 +9,8 @@ class Database
     private $user = 'root';
     private $password = '';
 
+    private $dsn;
+
     private $config = [
         'database' => [
             'host'    => 'localhost',
@@ -23,21 +25,26 @@ class Database
 
     public function __construct()
     {
-        $dsn = 'mysql:' . http_build_query($this->config['database'], '', ';');
+        $this->dsn = 'mysql:' . http_build_query($this->config['database'], '', ';');
 
         //$dsn = "mysql:host=localhost;port=3306;dbname=services;user=root;charset=utf8mb4";
-        $this->connection = new PDO(
+        /*$this->connection = new PDO(
             $dsn,
             $this->user,
             $this->password,
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
-        );
+        );*/
     }
 
     public function connect()
     {
         try {
-            $this->connection;
+            $this->connection = new PDO(
+                $this->dsn,
+                $this->user,
+                $this->password,
+                [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
+            );
         } catch (\PDOException $e) {
             echo 'Errore di connessione' . $e->getMessage();
         }

@@ -26,17 +26,17 @@ class MethodGateway
                     $result = $this->serviceClass->create($data);
                     http_response_code(201);
                     echo json_encode([
-                        'message'       => "New element with ID: {$result} is created",
-                        "ID: {$result}" => $data
+                        'message'     => "New element with ID: $result added to service type with ID: {$data['service_type_id']}",
+                        "ID: $result" => $data
                     ]);
                     break;
                 default:
-                    echo 'Error - Class not founded';
+                    echo json_encode(["Error Message" => "Models or class not founded"]);
                     break;
             }
         } else {
             http_response_code(400);
-            echo 'Super Error';
+            echo json_encode(["error" => "The body request is not correct, please try again"]);
         }
     }
 
@@ -44,7 +44,7 @@ class MethodGateway
     {
         $statement = $this->serviceClass->readAll();
         if (count($statement) <= 0) {
-            echo "No element available";
+            echo json_encode(["message" => "Sorry, no element available"]);
             return;
         }
         http_response_code(200);
@@ -53,8 +53,6 @@ class MethodGateway
 
     public function update($statement, $data)
     {
-        //se sono uguali
-
 
         if (!empty($data)) {
             switch ($this->serviceClass::class) {
@@ -71,18 +69,18 @@ class MethodGateway
                     $this->serviceClass->update($statement, $data);
                     http_response_code(200);
                     echo json_encode([
-                        'message' => "Element updated",
-                        "ID: {$statement['id']}" => $data
+                        'message'                                     => "Element with ID: {$statement['id']} updated",
+                        "Service ID: {$statement['service_type_id']}" => $data
                     ]);
 
                     break;
                 default:
-                    echo 'Error - Class not founded';
+                    echo json_encode(["Error Message" => "Models or class not founded"]);
                     break;
             }
         } else {
             http_response_code(400);
-            echo 'Super Error';
+            echo json_encode(["error" => "The body request is not correct, please try again"]);
         }
 
     }
@@ -96,14 +94,22 @@ class MethodGateway
             "Element" => "ID: $id"
         ]);
     }
+
+    public function totalTimeSaved()
+    {
+        $sum = $this->serviceClass->sum();
+        if ($sum) {
+            echo "Time saved using our services: " . json_encode($sum);
+        }
+    }
     public function processRequest($method, $uri)
     {
         $id      = basename($uri);
         $pattern = '#^/api/([A-Za-z-]+)(?:/(\d+))?$#';
         //! OCCHIO CAMBIO URL
         preg_match($pattern, $uri, $matches);
-        $test = $matches[2] ?? null;
-        if ($test === $id) {
+        $findID = $matches[2] ?? null;
+        if ($findID === $id) {
             $this->processResourceRequest($method, $id);
         } else {
             $this->processCollectionRequest($method);
@@ -114,7 +120,7 @@ class MethodGateway
         $statement = $this->serviceClass->read($id);
         if (!$statement) {
             http_response_code(404);
-            echo json_encode(['Error' => 'Element not founded']);
+            echo json_encode(['Error' => "Element with ID: $id not founded"]);
             return;
         }
 
@@ -138,6 +144,9 @@ class MethodGateway
     public function processCollectionRequest($method)
     {
         switch ($method) {
+            case ('GET' && ($_GET['total_time'] ?? null)):
+                $this->totalTimeSaved();
+                break;
             case 'GET':
                 $this->getAll();
                 break;
