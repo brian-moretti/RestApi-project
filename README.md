@@ -58,40 +58,124 @@ JSON Response:
 
 `api/service-type/{id}`: Return the services with the ID indicated
 
-`api/service-provided`: Return all the services provided.  
+JSON Response:
+
+```
+{
+    "id": 1,
+    "name": "service_name",
+    "time_saved": "00:01:00"
+}
+```
+
+`api/service-provided`: Return all the services provided.
+
+JSON Response:
+
+```
+{
+    "provided": [
+        {
+            "id": 1,
+            "service_type_id": 1,
+            "name": "service_name",
+            "time_saved": "00:01:00",
+            "selling_date": "2023-01-01",
+            "quantity": 1
+        }
+    ]
+},
+```
+
 `api/service-provided?name=service_name&from=from_date&to=to_date`: Return the services provided filtered by these params. All are optional and you can use all of them or just the one you need.
 
 - `name`: filter the services provided by matching the service name indicated
 - `from`: filter the services provided whose selling date is later the date indicated
 - `to`: filter the services provided whose selling date is before the date indicated
 
-`api/service-provided/{id}`: Return the services provided with the ID indicated.  
+JSON Response:
+
+```
+{
+    "provided": [
+        {
+            "id": 1,
+            "service_type_id": 1,
+            "name": "service_name",
+            "time_saved": "00:01:00",
+            "selling_date": "2023-01-01",
+            "quantity": 1
+        }
+    ]
+},
+```
+
+`api/service-provided/{id}`: Return the services provided with the ID indicated.
 
 JSON Response:
-`[{}]`
+
+```
+ {
+    "id": 1,
+    "service_type_id": 1,
+    "name": "service_name",
+    "time_saved": "00:01:00",
+    "selling_date": "2023-01-01",
+    "quantity": 1
+ }
+```
 
 #### Create Data | POST Method:
 
-`api/service-type`: Create a new service in the database. The body is required. Check the example below.  
+`api/service-type`: Create a new service in the database. The body is required. Check the example below.
+
 Body Example:
-`{ name: new_service_name, time_saved: time_value }`
+
+```
+{
+    name: new_service_name,
+    time_saved: time_value
+}
+```
 
 ---
 
 `api/service-provided`: Create a new service provided in the database based on an existing service type. The body is required. Check the example below
 
 Body Example:
-`{ service_type_id : service_id, quantity: number, selling_date: date }`
+
+```
+{
+    service_type_id : service_id,
+    quantity: number,
+    selling_date: date
+}
+```
 
 #### Update Data | PATCH Method:
 
 `api/service-type/{id}`: Modify an existing service. One of the property is required
+
 Body Example:
-`{ name: new_service_name, time_saved: time_value }`
+
+```
+{
+    name: new_service_name,
+    time_saved: time_value
+}
+```
 
 `api/service-provided/{id}`: Modify an existing service provided. One of the property is required
+
 Body Example:
-`{ service_type_id : service_id, quantity: number, selling_date: date }`
+
+```
+{
+    service_type_id : service_id,
+    quantity: number,
+    selling_date: date
+}
+```
 
 #### Delete Data | DELETE Method:
 
