@@ -1,11 +1,11 @@
 <?php
 
-headerParams();
 
 require '../config/database.php';
 require '../functions.php';
 require '../models/ServiceProvided.php';
 require '../controllers/MethodGateway.php';
+headerParams();
 
 $db              = new Database();
 $connection      = $db->connect();

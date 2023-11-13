@@ -22,7 +22,7 @@ class ServiceProvided
 
         $statement->bindValue(":selling_date", $data['selling_date']);
         $statement->bindValue(":quantity", $data['quantity'], PDO::PARAM_INT);
-        $statement->bindValue(":service_type_id", $data['id'], PDO::PARAM_INT);
+        $statement->bindValue(":service_type_id", $data['service_type_id'], PDO::PARAM_INT);
 
         $statement->execute();
         if ($statement->rowCount() > 0) {
@@ -45,8 +45,6 @@ class ServiceProvided
 
     public function readAll()
     {
-        //! TEMPO TOTALE QUA DENTRO?!
-
         $query = "SELECT sp.id, service_type_id, st.name, time_saved, selling_date, quantity FROM {$this->table_name} AS sp INNER JOIN service_type AS st ON st.id = service_type_id";
 
         $fromDate = $_GET['from'] ?? null;

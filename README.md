@@ -12,21 +12,6 @@ The Database is create with MySql. The file `migrations.sql` containt the sql co
 
 The structure of the project is the following:
 
-_/api_<br>
-_&nbsp;/config_<br>
-_&nbsp;&nbsp;/database.php_<br>
-_&nbsp;/controllers_<br>
-_&nbsp;&nbsp;/MethodGateway.php_<br>
-_&nbsp;/models_<br>
-_&nbsp;&nbsp;/ServiceType.php_<br>
-_&nbsp;&nbsp;/ServiceProvided.php_<br>
-_&nbsp;/service-type_<br>
-_&nbsp;&nbsp;/index.php_<br>
-_&nbsp;/service-provided_<br>
-_&nbsp;&nbsp;/index.php_<br>
-_&nbsp;/total-time-saved_<br>
-_&nbsp;&nbsp;/index.php_<br>
-
 ```
 └── /api/
     ├── /config/
@@ -48,49 +33,60 @@ _&nbsp;&nbsp;/index.php_<br>
 
 Base Path: `http://localhost:8888/api`
 
+#### Data
+
+`service-type`: `{ id: 1, name: service, time_saved: 01:00 }`  
+`service-provided`: `{ id: 1, service-type-id: 1, quantity: 1, selling_date: 2023/01/01 }`
+
 #### Read Data | GET Method:
 
-`api/service-type`:  
-`api/service-type/{id}`:
+`api/service-type`: Return all the services in the database
+`api/service-type/{id}`: Return the services with the ID indicated
 
 JSON Response:
 `[{}]`
 
 ---
 
-`api/service-provided`:
-`api/service-provided/{id}`:
+`api/service-provided`: Return all the services provided
+`api/service-provided?name=service_name&from=from_date&to=to_date`: Return the services provided filtered by these params. All are optional and you can use all of them or just the one you need.
+
+- name: filter the services provided by matching the service name indicated
+- from: filter the services provided whose selling date is later the date indicated
+- to: filter the services provided whose selling date is before the date indicated
+
+`api/service-provided/{id}`: Retur the services provided with the ID indicated
 
 JSON Response:
 `[{}]`
 
 #### Create Data | POST Method:
 
-`api/service-type`:
+`api/service-type`: Create a new service in the database. The body is required. Check the example below
 Body Example:
-`{}`
+`{ name: new_service_name, time_saved: time_value }`
 
 ---
 
-`api/service-provided`:
+`api/service-provided`: Create a new service provided in the database based on an existing service type. The body is required. Check the example below
 
 Body Example:
-`{}`
+`{ service_type_id : service_id, quantity: number, selling_date: date }`
 
 #### Update Data | PATCH Method:
 
-`api/service-type/{id}`:
+`api/service-type/{id}`: Modify an existing service. One of the property is required
 Body Example:
+`{ name: new_service_name, time_saved: time_value }`
 
----
-
-`api/service-provided/{id}`:
+`api/service-provided/{id}`: Modify an existing service provided. One of the property is required
 Body Example:
+`{ service_type_id : service_id, quantity: number, selling_date: date }`
 
 #### Delete Data | DELETE Method:
 
-`api/service-type/{id}`:
-`api/service-provided/{id}`:
+`api/service-type/{id}`: Delete an existing service
+`api/service-provided/{id}`: Delete an existing service provided
 
 _ /api/service-type _ : This endpoint will provide you all the services with GET Method and allow the creation of a new service with the POST Method (Body required)
 _ /api/service-type/{id} _ : This endpoint will provide you the information about a specific service with the GET Method, will allow you to modify the service with the PATCH Method and to delete the service with the DELETE Method
