@@ -27,6 +27,22 @@ _&nbsp;&nbsp;/index.php_<br>
 _&nbsp;/total-time-saved_<br>
 _&nbsp;&nbsp;/index.php_<br>
 
+.
+└── /api/
+    ├── /config/
+    │   └── /database.php
+    ├── /controllers/
+    │   └── /MethodGateway.php
+    ├── /models/
+    │   ├── /ServiceType.php
+    │   └── /ServiceProvided.php
+    ├── /service-type/
+    │   └── /index.php
+    ├── /service-provided/
+    │   └── /index.php
+    └── /total-time-saved/
+        └── /index.php
+
 ### REST API
 
 Base Path: `http://localhost:8888/api`
