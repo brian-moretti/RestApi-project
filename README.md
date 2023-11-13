@@ -56,6 +56,8 @@ JSON Response:
 }
 ```
 
+---
+
 `api/service-type/{id}`: Return the services with the ID indicated
 
 JSON Response:
@@ -67,6 +69,8 @@ JSON Response:
     "time_saved": "00:01:00"
 }
 ```
+
+---
 
 `api/service-provided`: Return all the services provided.
 
@@ -87,7 +91,9 @@ JSON Response:
 },
 ```
 
-`api/service-provided?name=service_name&from=from_date&to=to_date`: Return the services provided filtered by these params. All are optional and you can use all of them or just the one you need.
+---
+
+`api/service-provided?name=service_name&from=from_date&to=to_date`: Return the services provided filtered by these params. Are optional and you can use all of them or just the one you need.
 
 - `name`: filter the services provided by matching the service name indicated
 - `from`: filter the services provided whose selling date is later the date indicated
@@ -110,6 +116,8 @@ JSON Response:
 },
 ```
 
+---
+
 `api/service-provided/{id}`: Return the services provided with the ID indicated.
 
 JSON Response:
@@ -123,6 +131,24 @@ JSON Response:
     "selling_date": "2023-01-01",
     "quantity": 1
  }
+```
+
+---
+
+`api/total-time-saved`: Return both the total time saved for all the services in the database and the total time saved per service provided grouped by his name.
+
+JSON Response:
+
+```
+{
+    "Total Time Saved with our services": "01:00:00",
+    "Time Saved per service": [
+        {
+            "time_saved": "00:30:00",
+            "name": "service_name"
+        },
+    ]
+}
 ```
 
 #### Create Data | POST Method:
@@ -152,6 +178,8 @@ Body Example:
 }
 ```
 
+---
+
 #### Update Data | PATCH Method:
 
 `api/service-type/{id}`: Modify an existing service. One of the property is required
@@ -165,25 +193,43 @@ Body Example:
 }
 ```
 
+---
+
 `api/service-provided/{id}`: Modify an existing service provided. One of the property is required
 
 Body Example:
 
 ```
 {
-    service_type_id : service_id,
     quantity: number,
     selling_date: date
 }
 ```
 
+---
+
 #### Delete Data | DELETE Method:
 
 `api/service-type/{id}`: Delete an existing service
+
+JSON Response:
+
+```
+{
+    "id": 1,
+    "name": "service_name",
+    "time_saved": "00:01:00"
+}
+```
+
 `api/service-provided/{id}`: Delete an existing service provided
 
-_ /api/service-type _ : This endpoint will provide you all the services with GET Method and allow the creation of a new service with the POST Method (Body required)
-_ /api/service-type/{id} _ : This endpoint will provide you the information about a specific service with the GET Method, will allow you to modify the service with the PATCH Method and to delete the service with the DELETE Method
-_ /api/service-provided _ : This endpoint will provide you information about all the services provided with the GET Method, and allow you to provide a new service with the POST Method (Body required)
-_ /api/service-provided/{id} _ : This endpoint will provide you the information about a specific service provided with the GET Method, will allow you to modify the service with the PATCH Method and to delete the service with the DELETE Method
-_ /api/total-time-saved _ :
+JSON Response:
+
+```
+{
+    "id": 1,
+    "name": "service_name",
+    "time_saved": "00:01:00"
+}
+```
