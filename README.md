@@ -58,23 +58,21 @@ JSON Response:
 
 `api/service-type/{id}`: Return the services with the ID indicated
 
----
-
-`api/service-provided`: Return all the services provided
+`api/service-provided`: Return all the services provided.  
 `api/service-provided?name=service_name&from=from_date&to=to_date`: Return the services provided filtered by these params. All are optional and you can use all of them or just the one you need.
 
-- name: filter the services provided by matching the service name indicated
-- from: filter the services provided whose selling date is later the date indicated
-- to: filter the services provided whose selling date is before the date indicated
+- `name`: filter the services provided by matching the service name indicated
+- `from`: filter the services provided whose selling date is later the date indicated
+- `to`: filter the services provided whose selling date is before the date indicated
 
-`api/service-provided/{id}`: Retur the services provided with the ID indicated
+`api/service-provided/{id}`: Return the services provided with the ID indicated.  
 
 JSON Response:
 `[{}]`
 
 #### Create Data | POST Method:
 
-`api/service-type`: Create a new service in the database. The body is required. Check the example below
+`api/service-type`: Create a new service in the database. The body is required. Check the example below.  
 Body Example:
 `{ name: new_service_name, time_saved: time_value }`
 
