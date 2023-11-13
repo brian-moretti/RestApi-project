@@ -12,20 +12,20 @@ The Database is create with MySql. The file `migrations.sql` containt the sql co
 
 The structure of the project is the following:
 
-_/api<br>
-&nbsp;/config
-&nbsp;&nbsp;/database.php
-&nbsp;/controllers
-&nbsp;&nbsp;/MethodGateway.php
-&nbsp;/models
-&nbsp;&nbsp;/ServiceType.php
-&nbsp;&nbsp;/ServiceProvided.php
-&nbsp;/service-type
-&nbsp;&nbsp;/index.php
-&nbsp;/service-provided
-&nbsp;&nbsp;/index.php
-&nbsp;/total-time-saved
-&nbsp;&nbsp;/index.php _
+_/api_<br>
+_&nbsp;/config_<br>
+_&nbsp;&nbsp;/database.php_<br>
+_&nbsp;/controllers_<br>
+_&nbsp;&nbsp;/MethodGateway.php_<br>
+_&nbsp;/models_<br>
+_&nbsp;&nbsp;/ServiceType.php_<br>
+_&nbsp;&nbsp;/ServiceProvided.php_<br>
+_&nbsp;/service-type_<br>
+_&nbsp;&nbsp;/index.php_<br>
+_&nbsp;/service-provided_<br>
+_&nbsp;&nbsp;/index.php_<br>
+_&nbsp;/total-time-saved_<br>
+_&nbsp;&nbsp;/index.php_<br>
 
 ### REST API
 
