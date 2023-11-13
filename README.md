@@ -28,21 +28,22 @@ _&nbsp;/total-time-saved_<br>
 _&nbsp;&nbsp;/index.php_<br>
 
 ```
-_└── /api/_<br>
-    _├── /config/_<br>
-    _│   └── /database.php_<br>
-    _├── /controllers/_<br>
-    _│   └── /MethodGateway.php_<br>
-    _├── /models/_<br>
-    _│   ├── /ServiceType.php_<br>
-    _│   └── /ServiceProvided.php_<br>
-    _├── /service-type/_<br>
-    _│   └── /index.php_<br>
-    _├── /service-provided/_<br>
-    _│   └── /index.php_<br>
-    _└── /total-time-saved/_<br>
-        _└── /index.php_<br>
+└── /api/
+    ├── /config/
+    │   └── /database.php
+    ├── /controllers/
+    │   └── /MethodGateway.php
+    ├── /models/
+    │   ├── /ServiceType.php
+    │   └── /ServiceProvided.php
+    ├── /service-type/
+    │   └── /index.php
+    ├── /service-provided/
+    │   └── /index.php
+    └── /total-time-saved/
+        └── /index.php
 ```
+
 ### REST API
 
 Base Path: `http://localhost:8888/api`
