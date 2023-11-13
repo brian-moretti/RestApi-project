@@ -12,7 +12,7 @@ The Database is create with MySql. The file `migrations.sql` containt the sql co
 
 The structure of the project is the following:
 
-_/api
+_/api<br>
 &nbsp;/config
 &nbsp;&nbsp;/database.php
 &nbsp;/controllers
@@ -33,7 +33,7 @@ Base Path: `http://localhost:8888/api`
 
 #### Read Data | GET Method:
 
-`api/service-type`:
+`api/service-type`:  
 `api/service-type/{id}`:
 
 JSON Response:
