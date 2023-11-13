@@ -40,9 +40,12 @@ Base Path: `http://localhost:8888/api`
 
 #### Read Data | GET Method:
 
-`api/service-type`: Return all the services in the database  
+`api/service-type`: Return all the services in the database
+
 JSON Response:
-`{
+
+```
+{
     "type": [
         {
             "id": 1,
@@ -50,7 +53,9 @@ JSON Response:
             "time_saved": "00:01:00"
         },
     ]
-}`
+}
+```
+
 `api/service-type/{id}`: Return the services with the ID indicated
 
 ---
