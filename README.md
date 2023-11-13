@@ -6,6 +6,16 @@ Welcome to my PHP & MySql project made for the Master in Back-End Development fo
 
 The project is a REST API made for a startup that helps the people to make accessible the statal bonuses and services. The API will help the creation of a dashboard to view all the information. (No front-end code)
 
+## Istruction
+
+* Copy the repository from my Github
+* Open the file called `migrations.sql` and copy the code in your sql query to create the table and the column. (You should create a new database)
+* Start a web server (integrated with SQL and PHP) such as Laragon or similar. (Need a PHP, Apache, HTTP environment)
+* Open the terminal () and digit `php -S localhost:8888` 
+* Now you can use POSTMAN or similar to test the API
+
+## Documentation
+
 ### Project Structure
 
 The Database is create with MySql. The file `migrations.sql` containt the sql code to create the database you need to test or use the API
@@ -29,16 +39,34 @@ The structure of the project is the following:
         └── /index.php
 ```
 
-### REST API
+## REST API
 
 Base Path: `http://localhost:8888/api`
 
-#### Data
+### Data
 
-`service-type`: `{ id: 1, name: service, time_saved: 01:00 }`  
-`service-provided`: `{ id: 1, service-type-id: 1, quantity: 1, selling_date: 2023/01/01 }`
+`service-type`:
 
-#### Read Data | GET Method:
+```
+{
+    id: 1,
+    name: service,
+    time_saved: 01:00
+}
+```
+
+`service-provided`:
+
+```
+{
+     id: 1,
+     service-type-id: 1,
+     quantity: 1,
+     selling_date: 2023/01/01
+}
+```
+
+### Read Data | GET Method:
 
 `api/service-type`: Return all the services in the database
 
@@ -151,7 +179,7 @@ JSON Response:
 }
 ```
 
-#### Create Data | POST Method:
+### Create Data | POST Method:
 
 `api/service-type`: Create a new service in the database. The body is required. Check the example below.
 
@@ -180,7 +208,7 @@ Body Example:
 
 ---
 
-#### Update Data | PATCH Method:
+### Update Data | PATCH Method:
 
 `api/service-type/{id}`: Modify an existing service. One of the property is required
 
@@ -208,7 +236,7 @@ Body Example:
 
 ---
 
-#### Delete Data | DELETE Method:
+### Delete Data | DELETE Method:
 
 `api/service-type/{id}`: Delete an existing service
 
@@ -216,9 +244,8 @@ JSON Response:
 
 ```
 {
-    "id": 1,
-    "name": "service_name",
-    "time_saved": "00:01:00"
+    "Message": "Service deleted",
+    "Service": "ID: 1"
 }
 ```
 
@@ -228,8 +255,7 @@ JSON Response:
 
 ```
 {
-    "id": 1,
-    "name": "service_name",
-    "time_saved": "00:01:00"
+    "Message": "Service provided deleted",
+    "Service provided": "ID: 1"
 }
 ```

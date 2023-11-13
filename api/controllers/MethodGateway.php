@@ -60,7 +60,7 @@ class MethodGateway
                     $this->serviceClass->update($statement, $data);
                     http_response_code(200);
                     echo json_encode([
-                        'message'                => "Element updated",
+                        'Message'                => "Service updated",
                         "ID: {$statement['id']}" => $data
                     ]);
 
@@ -69,7 +69,7 @@ class MethodGateway
                     $this->serviceClass->update($statement, $data);
                     http_response_code(200);
                     echo json_encode([
-                        'message'                                     => "Element with ID: {$statement['id']} updated",
+                        'Message'                                     => "Service provided with ID: {$statement['id']} updated",
                         "Service ID: {$statement['service_type_id']}" => $data
                     ]);
 
@@ -80,19 +80,33 @@ class MethodGateway
             }
         } else {
             http_response_code(400);
-            echo json_encode(["error" => "The body request is not correct, please try again"]);
+            echo json_encode(["Error" => "The body request is not correct, please try again"]);
         }
 
     }
 
     public function delete($id)
     {
-        $this->serviceClass->delete($id);
-        http_response_code(200);
-        echo json_encode([
-            'Message' => "Element deleted",
-            "Element" => "ID: $id"
-        ]);
+        switch ($this->serviceClass::class) {
+            case 'ServiceType':
+                $this->serviceClass->delete($id);
+                http_response_code(200);
+                echo json_encode([
+                    'Message' => "Service deleted",
+                    "Service" => "ID: $id"
+                ]);
+                break;
+            case 'ServiceProvided':
+                $this->serviceClass->delete($id);
+                http_response_code(200);
+                echo json_encode([
+                    'Message'          => "Service provided deleted",
+                    "Service provided" => "ID: $id"
+                ]);
+            default:
+                echo json_encode(["Error Message" => "Models or class not founded"]);
+                break;
+        }
     }
 
     public function totalTimeSaved()
@@ -120,7 +134,7 @@ class MethodGateway
         $statement = $this->serviceClass->read($id);
         if (!$statement) {
             http_response_code(404);
-            echo json_encode(['Error' => "Element with ID: $id not founded"]);
+            echo json_encode(['Error' => "Service with ID: $id not founded"]);
             return;
         }
 
@@ -144,9 +158,6 @@ class MethodGateway
     public function processCollectionRequest($method)
     {
         switch ($method) {
-            /* case ('GET' && ($_GET['total_time'] ?? null)):
-                $this->totalTimeSaved();
-                break; */
             case 'GET':
                 $this->getAll();
                 break;
