@@ -27,7 +27,7 @@ _&nbsp;&nbsp;/index.php_<br>
 _&nbsp;/total-time-saved_<br>
 _&nbsp;&nbsp;/index.php_<br>
 
-.
+```
 _└── /api/_<br>
     _├── /config/_<br>
     _│   └── /database.php_<br>
@@ -42,7 +42,7 @@ _└── /api/_<br>
     _│   └── /index.php_<br>
     _└── /total-time-saved/_<br>
         _└── /index.php_<br>
-
+```
 ### REST API
 
 Base Path: `http://localhost:8888/api`
