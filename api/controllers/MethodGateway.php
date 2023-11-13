@@ -144,9 +144,9 @@ class MethodGateway
     public function processCollectionRequest($method)
     {
         switch ($method) {
-            case ('GET' && ($_GET['total_time'] ?? null)):
+            /* case ('GET' && ($_GET['total_time'] ?? null)):
                 $this->totalTimeSaved();
-                break;
+                break; */
             case 'GET':
                 $this->getAll();
                 break;
