@@ -4,7 +4,7 @@ Welcome to my PHP & MySql project made for the Master in Back-End Development fo
 
 ## :desktop_computer: The project
 
-The project is a REST API made for a startup born to help people to better undestand and get accessibility the statal bonuses and services. The API will help the creation of a dashboard to view all the information. (No front-end code)
+The project involves a REST API designed for a startup dedicated to assisting people in better understanding and accessing state bonuses and services. The API will facilitate the creation of a dashboard for comprehensive information viewing. (No front-end code)
 
 ## :gear: Instruction
 
