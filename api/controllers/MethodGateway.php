@@ -103,6 +103,7 @@ class MethodGateway
                     'Message'          => "Service provided deleted",
                     "Service provided" => "ID: $id"
                 ]);
+                break;
             default:
                 echo json_encode(["Error Message" => "Models or class not founded"]);
                 break;
@@ -123,7 +124,7 @@ class MethodGateway
         //! OCCHIO CAMBIO URL
         preg_match($pattern, $uri, $matches);
         $findID = $matches[2] ?? null;
-        
+
         if ($findID === $id) {
             $this->processResourceRequest($method, $id);
         } else {
