@@ -31,12 +31,12 @@ class MethodGateway
                     ]);
                     break;
                 default:
-                    echo json_encode(["Error Message" => "Models or class not founded"]);
+                    echo json_encode(["Error Message" => "Class not founded"]);
                     break;
             }
         } else {
-            http_response_code(400);
-            echo json_encode(["error" => "The body request is not correct, please try again"]);
+            http_response_code(422);
+            echo json_encode(["Error" => "The body request is not correct, please try again"]);
         }
     }
 
@@ -79,7 +79,7 @@ class MethodGateway
                     break;
             }
         } else {
-            http_response_code(400);
+            http_response_code(422);
             echo json_encode(["Error" => "The body request is not correct, please try again"]);
         }
 
@@ -123,6 +123,7 @@ class MethodGateway
         //! OCCHIO CAMBIO URL
         preg_match($pattern, $uri, $matches);
         $findID = $matches[2] ?? null;
+        
         if ($findID === $id) {
             $this->processResourceRequest($method, $id);
         } else {
@@ -151,6 +152,7 @@ class MethodGateway
                 break;
             default:
                 http_response_code(405);
+                header("Allow: GET, PATCH, DELETE");
                 break;
         }
     }
@@ -166,6 +168,7 @@ class MethodGateway
                 break;
             default:
                 http_response_code(405);
+                header("Allow: GET, POST");
                 break;
         }
     }

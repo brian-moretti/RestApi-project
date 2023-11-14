@@ -1,13 +1,12 @@
 <?php
 
-
 echo "Change the URL to one of the following to get access to the information about API" . json_encode([
     "/api/service-type"          => [
         "Description"    => "Get access to our services",
         "Method Allowed" => "GET | POST (body required)"
     ],
     "/api/service-type/{id}"     => [
-        "Description"    => "Get access to, modify or delete a specific ID service",
+        "Description"    => "Get access, modify or delete a specific ID service",
         "Method Allowed" => "GET | PATCH | DELETE"
     ],
     "/api/service-provided"      => [
@@ -16,7 +15,7 @@ echo "Change the URL to one of the following to get access to the information ab
         "Additional"     => "Possibility to filter date throught these params: 'from' | 'to' | 'name'"
     ],
     "/api/service-provided/{id}" => [
-        "Description"    => "Get access to, modify or delete a specific ID service",
+        "Description"    => "Get access, modify or delete a specific ID service",
         "Method Allowed" => "GET | PATCH | DELETE"
     ],
     "/api/total-time-saved"      => [

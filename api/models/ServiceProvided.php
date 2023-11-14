@@ -15,7 +15,6 @@ class ServiceProvided
         $query     = "INSERT INTO {$this->table_name} (selling_date, quantity, service_type_id) VALUES (:selling_date, :quantity, :service_type_id)";
         $statement = $this->connection->prepare($query);
 
-        //! ID servizio va prelevato da ServiceType??
         $data['selling_date']    = htmlspecialchars(strip_tags($data['selling_date']));
         $data['quantity']        = htmlspecialchars(strip_tags($data['quantity']));
         $data['service_type_id'] = htmlspecialchars(strip_tags($data['service_type_id']));
@@ -92,7 +91,6 @@ class ServiceProvided
 
     }
     public function delete($id)
-    //! DELETE CASCADE SU TYPE
     {
         $query     = "DELETE FROM {$this->table_name} WHERE id = :id";
         $statement = $this->connection->prepare($query);

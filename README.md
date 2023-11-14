@@ -9,7 +9,8 @@ The project involves a REST API designed for a startup dedicated to assisting pe
 ## :gear: Instruction
 
 - Copy the repository from my Github
-- Open the file called `migrations.sql` and copy the code in your sql query to create the table and the column. (You should create a new database first)
+- Open the file called `migrations.sql`. Get access to SQL and copy the code in the query to create a database, the tables and the columns.
+- The config of the database should be: `user = root; password = ''; port: 3306; host: localhost`.
 - Start a web server (integrated with SQL and PHP) such as Laragon or similar. (Need a PHP, Apache, HTTP environment)
 - Open the terminal (you should change the directory to the one copied) and digit `php -S localhost:8888`
 - Now you can use POSTMAN or similar to test the API
