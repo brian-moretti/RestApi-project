@@ -1,24 +1,22 @@
 # PHP & MySql Project
 
-Welcome to my PHP & MySql project made for the Master in Back-End Development for start2impact university.
+Welcome to my PHP & MySql project made for the Master in Back-End Development for Start2impact University.
 
-## The project
+## :desktop_computer: The project
 
-The project is a REST API made for a startup that helps the people to make accessible the statal bonuses and services. The API will help the creation of a dashboard to view all the information. (No front-end code)
+The project is a REST API made for a startup born to help people to better undestand and get accessibility the statal bonuses and services. The API will help the creation of a dashboard to view all the information. (No front-end code)
 
-## Istruction
+## :gear: Instruction
 
-* Copy the repository from my Github
-* Open the file called `migrations.sql` and copy the code in your sql query to create the table and the column. (You should create a new database)
-* Start a web server (integrated with SQL and PHP) such as Laragon or similar. (Need a PHP, Apache, HTTP environment)
-* Open the terminal () and digit `php -S localhost:8888` 
-* Now you can use POSTMAN or similar to test the API
+- Copy the repository from my Github
+- Open the file called `migrations.sql` and copy the code in your sql query to create the table and the column. (You should create a new database first)
+- Start a web server (integrated with SQL and PHP) such as Laragon or similar. (Need a PHP, Apache, HTTP environment)
+- Open the terminal (you should change the directory to the one copied) and digit `php -S localhost:8888`
+- Now you can use POSTMAN or similar to test the API
 
-## Documentation
+## :page_facing_up: Documentation
 
 ### Project Structure
-
-The Database is create with MySql. The file `migrations.sql` containt the sql code to create the database you need to test or use the API
 
 The structure of the project is the following:
 
@@ -39,7 +37,7 @@ The structure of the project is the following:
         └── /index.php
 ```
 
-## REST API
+## :clipboard: REST API
 
 Base Path: `http://localhost:8888/api`
 
@@ -86,7 +84,7 @@ JSON Response:
 
 ---
 
-`api/service-type/{id}`: Return the services with the ID indicated
+`api/service-type/{id}`: Return the service with the ID indicated
 
 JSON Response:
 
@@ -121,7 +119,7 @@ JSON Response:
 
 ---
 
-`api/service-provided?name=service_name&from=from_date&to=to_date`: Return the services provided filtered by these params. Are optional and you can use all of them or just the one you need.
+`api/service-provided?name=service_name&from=from_date&to=to_date`: Return the services provided filtered by these params. (These params are optional and you can use all of them or just the one you need)
 
 - `name`: filter the services provided by matching the service name indicated
 - `from`: filter the services provided whose selling date is later the date indicated
@@ -146,7 +144,7 @@ JSON Response:
 
 ---
 
-`api/service-provided/{id}`: Return the services provided with the ID indicated.
+`api/service-provided/{id}`: Return the service provided with the ID indicated.
 
 JSON Response:
 
@@ -259,3 +257,7 @@ JSON Response:
     "Service provided": "ID: 1"
 }
 ```
+
+## :incoming_envelope: Contact me
+
+If you find some bugs to fix or simply you want to send me a message please write me at [brianmoretti2512@gmail.com](mailto:brianmoretti2512@gmail.com)
