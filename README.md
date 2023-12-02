@@ -10,7 +10,7 @@ The project involves a REST API designed for a startup dedicated to assisting pe
 
 - Copy the repository from my Github
 - Open the file called `migrations.sql`. Get access to SQL and copy the code in the query to create a database, the tables and the columns.
-- The config of the database should be: `user = root; password = ''; port: 3306; host: localhost`.
+- Check the file `config.php` then create and fill the file `.env` based on `.env.example`.
 - Start a web server (integrated with SQL and PHP) such as Laragon or similar. (Need a PHP, Apache, HTTP environment)
 - Open the terminal (you should change the directory to the one copied) and digit `php -S localhost:8888`
 - Now you can use POSTMAN or similar to test the API
@@ -22,20 +22,29 @@ The project involves a REST API designed for a startup dedicated to assisting pe
 The structure of the project is the following:
 
 ```
-└── /api/
-    ├── /config/
-    │   └── /database.php
-    ├── /controllers/
-    │   └── /MethodGateway.php
-    ├── /models/
-    │   ├── /ServiceType.php
-    │   └── /ServiceProvided.php
-    ├── /service-type/
-    │   └── /index.php
-    ├── /service-provided/
-    │   └── /index.php
-    └── /total-time-saved/
-        └── /index.php
+.
+├── App/
+│   ├── controllers/
+│   │   ├── RestControllers-php
+│   │   ├── ServiceProvidedControllers.php
+│   │   ├── ServiceTypeControllers.php
+│   │   └── TotalTimeSavedControllers.php
+│   ├── models/
+│   │   ├── ServiceProvided.php
+│   │   ├── ServiceType.php
+│   │   └── TotalTimeSaved.php
+│   └── routes.php
+├── Core/
+│   ├── App.php
+│   ├── bootstrap.php
+│   ├── Database.php
+│   ├── Request.php
+│   ├── Response.php
+│   └── Router.php
+├── index.php
+├── config.php
+├── .env
+└── migrations.sql
 ```
 
 ## :clipboard: REST API
